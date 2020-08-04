@@ -1,53 +1,88 @@
-/* 
-  https://www.hackerearth.com/practice/algorithms/sorting/bubble-sort/visualize/
-  Stable sort
-  
-  Time Complexity
-    - Best:     O(n) linear when array is already sorted
-    - Average:  O(n^2) quadratic
-    - Worst:    O(n^2) quadratic when the array is reverse sorted
-  Space: O(1) constant
-  For review, create a function that uses BubbleSort to sort an unsorted array in-place.
-  For every pair of adjacent indicies, swap them if the item on the left is larger than the item on the right until array is fully sorted
-*/
-
-function bubbleSort(nums){
-  var swap=false;
-  for(var i=0;i<arr.length;i++)
-  {
-      swap=false;
-      for(var j=1;j<arr.length;j++)
-      {
-        if(arr[j]<arr[j-1])
-        {
-            var temp=arr[j];
-             arr[j]=arr[j-1];
-             arr[j-1]=temp;
-             swap=true;
-        }   
-      }
-      if(!swap)
-          break;
+class SLNode{
+  constructor(value){
+    this.value = value
+    this.next = null
   }
-  return arr;
-
 }
 
-/* 
-  https://visualgo.net/en/sorting
-    
-  Selection sort works by iterating through the list, finding the minimum value, and moving it to the beginning of the list. Then, ignoring the first position, which is now sorted, iterate through the list again to find the next minimum value and move it to index 1. This continues until all values are sorted.
-  Unstable sort
-  
-  Time Complexity
-    - Best:     O(n^2) quadratic
-    - Average:  O(n^2) quadratic
-    - Worst:    O(n^2) quadratic
-  Space: O(1) constant
-  Selection sort is one of the slower sorts.
-  - ideal for: pagination, where page 1 displays 10 records for example, you run selection sort for 10 iterations only to display the first 10 sorted items
-*/
+class SLL{
+  constructor(){
+    this.head = null
+  }
+  printAllValues(){
+    if(this.head ===  null){
+      console.log('LIST IS EMPTY')
+    }
+    var runner = this.head
+    while(runner.next != null){
+        console.log(runner.value)
+        runner = runner.next
+    }
+    console.log(runner.value)
+  }
 
-function selectionSort(nums){
+  isEmpty(){
+    if(this.head === null){
+      return true
+    }
+    else{
+      return false
+    }
+  }
 
-}
+  push(value){
+    // 1. CREATING A NEW NODE WHEN THE LIST IS EMPTY
+    var newNode = new SLNode(value)
+    if(this.head === null){
+      this.head = newNode
+      return
+    }
+    // 2. CREATING A NEW NODE WHEN THE LIST IS NOT EMPTY
+    var runner = this.head
+    while(runner.next != null){
+      runner = runner.next
+    }
+    runner.next = newNode
+  };
+
+  insertAtFront(value){
+    var newNode=new SLNode(value);
+    newNode.next=this.head;
+    this.head=newNode;
+
+  };
+  removeAtFront(){
+    var delNode=this.head;
+    this.head=delNode.next;
+    delNode.next=null;
+  };
+  seedFromArr(arr){
+    var lastNode= this.head;
+    while(lastNode.next!=null){
+      lastNode=lastNode.next;
+    }
+    for(let i=0;i<arr.length;i++){
+      var newNode=new SLNode(arr[i]);
+      lastNode.next=newNode;
+      lastNode=newNode;
+    }
+  }
+
+
+};
+
+
+var list = new SLL();
+list.push(1)
+list.push(2)
+list.push(3)
+list.push(4)
+
+list.insertAtFront(6)
+list.printAllValues()
+list.removeAtFront()
+list.printAllValues()
+
+var arr = [7,8,9]
+list.seedFromArr(arr)
+list.printAllValues();

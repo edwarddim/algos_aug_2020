@@ -9,6 +9,17 @@ class SLL{
   constructor(){
     this.head = null
   }
+  printAllValues(){
+    if(this.head ===  null){
+      console.log('LIST IS EMPTY')
+    }
+    var runner = this.head
+    while(runner.next != null){
+        console.log(runner.value)
+        runner = runner.next
+    }
+    console.log(runner.value)
+  }
 
   isEmpty(){
     if(this.head === null){
