@@ -58,7 +58,50 @@ class SLL{
     tempVar = null
   };
 
+  pop(){
+    var runner = this.head
+    while(runner.next.next != null){
+      runner = runner.next
+    }
+    runner.next=null;
+  }
+
+  contains(val){
+    var runner=this.head;
+    while(runner.next !=null){
+      if(runner.value==val){return true}
+      runner=runner.next
+    }
+    if(runner.value==val){return true}
+    return false
+  }
+
+  remove(val){
+    var runner=this.head;
+    var before;
+    if(runner.value==val){this.head=runner.next}
+    else{
+      while(runner.next !=null){
+        if(runner.value==val){before.next=runner.next;}
+        before = runner;
+        runner=runner.next
+      }
+      if(runner.value==val){before.next=null}
+    }
+  }
 };
+
+
+
+var list = new SLL();
+list.push(1)
+list.push(2)
+list.push(3)
+list.push(4)
+
+list.insertAtFront(6)
+list.printAllValues()
+console.log("-----------------------------------")
 
 var list = new SLL();
 list.push(1)
@@ -71,3 +114,13 @@ list.printAllValues()
 console.log("-----------------------------------")
 list.removeAtFront()
 list.printAllValues()
+console.log("-----------------------------------")
+list.pop();
+list.printAllValues();
+
+console.log("-----------------------------------")
+console.log(list.contains(3))//should return true
+console.log(list.contains(4))//should return false
+console.log("-----------------------------------")
+list.remove(2);
+list.printAllValues();//should log 1,3

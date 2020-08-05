@@ -67,6 +67,33 @@ class SLL{
       lastNode=newNode;
     }
   }
+  remove(value){
+    // THIS ALGO WORKS IF THE VALUE WE ARE LOOKING FOR IS IN THE MIDDLE OF LIST
+    // IF IT'S THE FIRST OR THE LAST IT WOULD NOT WORK
+    var runner = this.head;
+
+    while(runner.next.value != value){
+      runner = runner.next
+    }
+    if(){
+      this.removeAtFront()
+    }
+    if(runner.next = null){
+      this.pop()
+    }
+    else{
+    var runner2 = runner.next;
+    runner.next = runner2.next;
+    }
+
+  }
+  pop(){
+    var runner = this.head;
+    while(runner.next.next != null){
+      runner = runner.next
+    }
+    runner.next = null;
+  }
 
 
 };
