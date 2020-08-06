@@ -94,6 +94,31 @@ class SLL{
     }
     runner.next = null;
   }
+  // CREATING A NEW LIST
+  partitionNew(num){
+    var list = new SLL()
+    runner = this.head
+    while(runner.next != null){
+      if(runner.value < num){
+        list.insertAtFront(runner.value)
+      }
+      if(runner.value >= num){
+        list.push(runner.value)
+      }
+      runner = runner.next
+    }
+    // ONE LAST IF CHECK FOR THE LAST NODE
+    this.head = list.head
+  }
+  // REARRANGING A LIST
+  partition(num){
+    var runner = this.head
+    while(runner.next != null){
+      if(runner.value < num){
+        
+      }
+    }
+  }
 
 
 };

@@ -71,8 +71,12 @@ class SLL{
 
 // THUR
 
-// secondToLast()
-// removeVal(val)
+// partition(num)
+// PARTITION A LINKED LIST AROUND A VALUE X, SUCH THAT ALL NODE LESS THAN X
+// COME BEFORE ALL NODES GREATER THAN OR EQUAL TO X
+// partition(5)
+// INPUT: 3->5->8->5->10->2->1
+// OUTPUT: 3->1->2 -> 10->5->5->8
 // -----------------------------------------------------------------------------------------------//
 // -----------------------------------------------------------------------------------------------//
 

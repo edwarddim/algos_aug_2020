@@ -89,6 +89,43 @@ class SLL{
       if(runner.value==val){before.next=null}
     }
   }
+  // CREATING A NEW LIST
+  partitionNew(num){
+    var newList = new SLL();
+    var runner=this.head  
+    while(runner.next!=null){
+      if(runner.value<num){
+        newList.push(runner.value)
+      }
+      runner=runner.next
+    }
+    if(runner.value<num){
+      newList.push(runner.value)
+    }
+    runner = this.head;
+    while(runner.next!=null){
+      if(runner.value>num){
+        newList.push(runner.value)
+      }
+      runner=runner.next
+    }
+    if(runner.value>num){
+      newList.push(runner.value)
+    }
+    this.head = newList.head;
+  }
+  // REARRANGING LIST
+  partition(num){
+    var runner=this.head;
+    while(runner.next!=null){
+      if(runner.value<num){
+        var temp=runner.value;
+        runner=runner.next;
+        this.remove(temp);
+        this.insertAtFront(temp);
+      } 
+    }
+  }
 };
 
 
@@ -104,10 +141,20 @@ list.printAllValues()
 console.log("-----------------------------------")
 
 var list = new SLL();
-list.push(1)
+list.push(41)
+list.push(5)
+list.push(23)
+list.push(54)
 list.push(2)
-list.push(3)
-list.push(4)
+list.push(13)
+list.push(1)
+// list.push(31)
+// list.push(42)
+// list.push(3)
+// list.push(51)
+// list.push(42)
+// list.push(63)
+
 
 list.insertAtFront(6)
 list.printAllValues()
@@ -123,4 +170,7 @@ console.log(list.contains(3))//should return true
 console.log(list.contains(4))//should return false
 console.log("-----------------------------------")
 list.remove(2);
-list.printAllValues();//should log 1,3
+list.printAllValues();
+console.log("-----------------------------------")
+list.partitionNew(20);
+list.printAllValues();
