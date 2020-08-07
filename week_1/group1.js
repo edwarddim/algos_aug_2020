@@ -119,6 +119,21 @@ class SLL{
       }
     }
   }
+  
+  reverse(){
+    var runner = this.head.next;
+    var previous = this.head;
+    var following;
+    var firstHead = this.head;
+    while (runner.next != null){
+      runner.next = previous
+      previous = runner
+      runner = following
+      following = runner.next
+    }
+    this.head = following;
+    firstHead.next = null
+  }
 
 
 };

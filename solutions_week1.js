@@ -40,3 +40,17 @@ partition(num){
     this.head = leftPartitionHead
     leftRunner.next = rightPartitionHead
 }
+
+
+reverseList(){
+    var prevRunner = null
+    var nextRunner = null
+    var currentRunner = this.head
+    while(currentRunner !=null){
+        nextRunner = currentRunner.next
+        currentRunner.next = prevRunner
+        prevRunner = currentRunner
+        currentRunner = nextRunner
+    }
+    this.head = prevRunner
+}

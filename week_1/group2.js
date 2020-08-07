@@ -116,7 +116,7 @@ class SLL{
   }
   // REARRANGING LIST
   partition(num){
-    var runner=this.head;
+    var runner=this.head; 
     while(runner.next!=null){
       if(runner.value<num){
         var temp=runner.value;
@@ -125,6 +125,32 @@ class SLL{
         this.insertAtFront(temp);
       } 
     }
+  }
+
+  reverseNew(){
+    var newList=new SLL();
+    var runner=this.head;
+    while(runner.next!=null){
+      newList.insertAtFront(runner.value);
+      runner=runner.next;
+    }
+    newList.insertAtFront(runner.value);
+    return newList;
+  }
+    
+  
+  reverse(){
+    var runner=this.head.next;
+    var before=this.head;
+    before.next=null;
+    while(runner.next!=null){
+      var temp=runner.next;
+      runner.next=before;
+      before=runner;
+      runner=temp;
+  }
+  runner.next=before;
+  this.head=runner;
   }
 };
 
@@ -174,3 +200,9 @@ list.printAllValues();
 console.log("-----------------------------------")
 list.partitionNew(20);
 list.printAllValues();
+console.log("------------Reverse--------------")
+list.reverse();
+list.printAllValues();
+console.log("--------ReverseNew---------")
+var list2=list.reverseNew();
+list2.printAllValues();
