@@ -147,30 +147,51 @@ class SLQueue {
     }
 
 }
-
+// queue a,b,c,b,a
+//stack a,b,c,b,a
   
     isPalindrome(){
-        var stack = new Stack()
-        // Loop through the size of the queue and fill stack 
-        // with letters
-        runner = this.head
-        stack.push(runner)
-        while(runner.next != null){
-            stack.push(runner)
-            runner = runner.next
+        var stack = new SLStack()
+        var mismatch = 0;
+        for (var i = 0; i < this.size; i++){
+          var temp = this.dequeue()
+          stack.push(temp)
+          this.enqueue(temp)
         }
-        stack.push(runner)
-
-        return (stack == queue)
-        // var forward = "" //-> "abcba"
-        // var backwards "" // -> should be same
-        // runner that adds each letter to forward
-        // runner that adds each letter going backwards from end to front
-        // return (forward == backwards)
+        for (var i = 0; i < this.size; i++){
+          var temp = this.dequeue()
+          var tempStack = stack.pop()
+          this.enqueue(temp)
+          if(temp != tempStack){
+            mismatch ++
+          }
+        }
+        return (mismatch == 0)
     }
-  
-    // Time: O(n) linear since enqueue is O(1), n = vals.length
-    // Space: O(1)
+
+
+    isSumOfHalvesEqual(){
+      var sum1 = 0
+      var sum2 = 0
+
+      if(this.size % 2 == 1){
+        return false
+      }
+
+      for (var i = 0; i < this.size/2; i++){
+        var temp = this.dequeue()
+        sum1 += temp
+        this.enqueue(temp)
+      }
+      for (var i = 0; i < this.size/2; i++){
+        var temp = this.dequeue()
+        sum2 += temp
+        this.enqueue(temp)
+      }
+      return (sum1 == sum2)
+    }
+    
+
   }
   
   var queue = new SLQueue()
@@ -180,3 +201,47 @@ class SLQueue {
   queue.enqueue('b')
   queue.enqueue('a')
   queue.isPalindrome()
+
+
+  // THUR
+class CircleQueue{
+  constructor(length){
+      this.size = length
+      this.head = -1
+      this.tail = -1
+      this.items = new Array(length)
+  }
+
+
+  displayValues(){
+      console.log(this.items)
+  }
+  enqueue(value){
+    // if empty, means head is -1 or null, if enqueued and then dequeued
+    if((this.tail +1) % this.size === this.head) return "array is full";
+    this.tail = (this.tail +1) % this.size;
+    if (this.head == -1) this.head = 0;
+    // if size is 5 0,1,2,3,4
+    this.items[this.tail] = value;
+  }
+
+  
+  dequeue(){
+    if (this.head == -1){
+      return "array is already empty"
+    }
+    var temp=this.items[this.head];
+    this.items[this.head]=null;
+    if(this.head == this.tail){
+      this.head=-1;
+      this.tail=-1;
+    }
+    else this.head = (this.head +1) % this.size;
+    return temp;
+  }
+  
+
+
+}
+var circleQ = new CircleQueue(9)
+

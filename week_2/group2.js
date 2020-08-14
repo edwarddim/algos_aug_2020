@@ -12,32 +12,29 @@ class SLStack {
     push(newVal) {
         // push newVal to top of stack
         var newNode = new SLNode(newVal)
-        if (this.head != null){
+        if (this.head == null){
             this.head = newNode
         }
         else{
             newNode.next = this.head
             this.head = newNode
         }
-    
     }
     pop() {
         // remove and return data at top of stack
         if (this.head != null){
-            var tempHead = this.head.value
-            if (this.head.next != null){
-                this.head = this.head.next
-                this.head.next = null
-            }
-            this.head = null;
-            return tempHead
+            var tempHead = this.head.value;
+            this.head = this.head.next;
+                
+        }
+            return tempHead;
         }
     }
     
     peek() {
         // return data at top of stack without removing
-        if (list.head != null){
-            return list.head.value
+        if (this.head != null){
+            return this.head.value;
         }
     }
 
@@ -118,7 +115,7 @@ class SLQueue {
     {
          this.tail.next=newnode;
     }
-    this.tail=newnode;
+    this.tail=newnode;   
     this.size++;
 
     }
@@ -169,36 +166,76 @@ class SLQueue {
       return vals;
     }
     isPalindrome(){
-    
-    var palinstack=new Stack();
-    
+        var palinstack=new SLStack();
+        var dequeuevalue;
+        var bool=true;
+        for(var x=0;x<this.size;x++){
+            dequeuevalue=this.dequeue();
+            palinstack.push(dequeuevalue);
+            this.enqueue(dequeuevalue);
+        }
+        for(x=0;x<this.size;x++){
+            dequeuevalue=this.dequeue();
+            if(dequeuevalue != palinstack.pop()){
+                bool=false;
+            }
+            this.enqueue(dequeuevalue);
+        }
+        return bool;
     //Do we HAVE to dequeue from the queue to solve this problem or can we just not dequeue to preserve order?
     // you don't HAVE to, but that's the restriction for the Algo
     }
 }
-/* 
-    Queue: Is Palindrome
-    Output: Bool representing if the queue items are a palindrome (items same forwards as reversed)
-    
-    Restore Queue to original state before returning.
-    For storage, use one additional Stack only.
-    You CAN use vars to store a dequeued and/or popped item, 
-    but NO string concatenating the entire queue, no 2nd stack, 2nd queue, or arrays.
-    
-  */
-
-  /* 
-    Approach:
-    1. loop over fixed-length of queue
-      - dequeue each item and push it into the stack
-      - enqueue each item back into the queue to preserve it's order
-    2. loop over fixed-length of queue and check equality of popped & dequeued vals
-      - enqueue each dequeued item back into the queue to preserve it's order
-    Time: O(2n) -> O(n) linear, n = queue length
-    Space: O(n) from the stack being used
-  */
 
  
 
 // Time: O(n) linear since enqueue is O(1), n = vals.length
 // Space: O(1)
+var list=new SLQueue();
+list.enqueue("A")
+list.enqueue("B")
+list.enqueue("C")
+list.enqueue("B")
+list.enqueue("A")
+console.log(list.isPalindrome());
+
+
+// -------------------------------------------//
+class CircleQueue{
+    constructor(length){
+        this.size = length
+        this.head = -1
+        this.tail = -1
+        this.items = new Array(length)
+    }
+    displayValues(){
+        console.log(this.items)
+    }
+    enqueue(value){
+        // CHECK IF THE QUEUE IS FULL
+        if((this.tail+1)%this.size==this.head){
+            console.log("Queue is full")
+            return false
+        }
+        //INCREMENT TAIL
+        this.tail=(this.tail+1)%this.size;
+        //ADD VALUE TO QUEUE WITH NEW TAIL POSITION
+        this.items[this.tail]=value
+        //CHECK IF THE QUEUE WAS EMPTY
+        if(this.head==-1){this.head=0}
+    }
+    dequeue(){
+        // if(this.head==this.size-1){this.head=0}
+        // else{this.head++}
+  
+    }
+
+}
+
+var circleQ = new CircleQueue(10)
+circleQ.displayValues()
+circleQ.enqueue('a')
+circleQ.enqueue('b')
+circleQ,dequeue()
+circleQ.enqueue('c')
+

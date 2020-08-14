@@ -194,11 +194,59 @@ queue.isPalindrome()
 
 // WED
 
+/* 
+  Write a method that returns whether or not the sum of a queue's first half is equal to the sum of it's
+  second half. Use no other objects, do not loop directly over the underlying array,
+  or access by index
+  When the function finishes, the queue should be in it's original state.
+  
+  Time: O(n) linear, n = queue length
+  Space: O(1) constant
+*/
+
+isSumOfHalvesEqual(){
+
+}
+
 
 // -----------------------------------------------------------------------------------------------//
 // -----------------------------------------------------------------------------------------------//
 
 // THUR
+class CircleQueue{
+  constructor(length){
+      this.size = length
+      this.head = -1
+      this.tail = -1
+      this.items = new Array(length)
+  }
+  displayValues(){
+      console.log(this.items)
+  }
+  enqueue(value){
+    // LIST IS FULL
+    if((this.tail + 1) % this.size === this.head ){
+      console.log("THE QUEUE IS FULL")
+      return false
+    }
+
+    // LIST IS EMPTY
+    if(this.head == -1){
+      this.head = 0
+      this.tail = 0
+      this.items[this.head] = value
+    }
+    // LIST IS PARTIALLY FULL
+
+
+  }
+  dequeue(){
+
+  }
+}
+var circleQ = new CircleQueue(9);
+circleQ.enqueue('a')
+
 
 
 // -----------------------------------------------------------------------------------------------//
