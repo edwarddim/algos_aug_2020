@@ -67,15 +67,77 @@ rMax(runner=this.root){
     return this.rMax(runner.right);
 }
 
-// -----------------------------------------------------------------------------------------------//
-// -----------------------------------------------------------------------------------------------//
+insert(value){
+    runner=this.root;
+    let newNode= new BSTNode(value);
+    while(runner!=null){
+        if(runner.value>value){
+            if(runner.left==null){
+                runner.left=newNode;
+                return;
+            }
+            else runner=runner.left;
+        }
+        else {
+            if(runner.right==null){
+                runner.right=newNode;
+                return;
+            }
+            else runner=runner.right;
+        }
+    }
+}
 
-// TUE
-// contains()
-// range()
+rInsert(value, runner=this.root){
+    if(runner.value>value&&runner.left==null){
+        runner.left=new BSTNode(value);
+        return;
+    }
+    else if(runner.value<value&&runner.right==null){
+        runner.right=new BSTNode(value);
+        return;
+    }
+    if(runner.value>value)return this.rInsert(value, runner=runner.left);
+    else return this.rInsert(value, runner=runner.right);
+}
 
-// -----------------------------------------------------------------------------------------------//
-// -----------------------------------------------------------------------------------------------//
+contains(value){
+    runner=this.root;
+    while(runner!=null){
+        if(runner.value==value)return true;
+        else if(runner.value>value)runner=runner.left;
+        else runner=runner.right;
+    }
+    return false;
+}
+
+rContains(value, runner=this.root){
+    if(runner.value==value)return true;
+    else if(runner==null)return false;
+    if(runner.value>value) return this.rContains(value, runner=runner.left)
+    else return this.rContains(value, runner=runner.right)
+}
+
+range(){
+    return this.max()-this.min();
+}
+
+rRange(){
+    return this.rMax()-this.rMin();
+}
+
+height(){
+    let dict={};
+    runner=this.root;
+    while(runner!=null){
+        for(let i=this.min();i<this.this.max();)
+        let count=1;
+        
+    }
+    
+}
+
+
 
 // WED
 // insert(value)
