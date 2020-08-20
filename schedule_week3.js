@@ -62,14 +62,46 @@ contains(value){
 
 // WED
 // 
+/* 
+    TAKES IN A SORTED ARR AND CREATES A BST WITH NUMBERS
+    FROM ARRAY
+*/
+sortedArrtoBST(arr){
 
-// height()
+}
+
+/* 
+    RETURNS THE HEIGHT OF THE BST
+*/
+height(){
+
+}
 
 // -----------------------------------------------------------------------------------------------//
 // -----------------------------------------------------------------------------------------------//
 
 // THUR
-// isBalanced()
+/* 
+    CHECK IF THE BST IS CURRENTLY BALANCED
+    REQUIREMENTS FOR BEING BALANCED:
+    1. DIFFERENCE OF HEIGHT IN LEFT AND RIGHT NODE MUST 1 OR LESS
+    2. ALL NODES WITHIN BST MUSBT BE BALANCED, NOT JUST THE ROOT
+*/
+isBalanced(node){
+
+}
+
+/* 
+    DELETE THE NODE CONTAING VALUE GIVEN, IF VALUE DOESN'T EXIST WITHIN TREE RETURN FALSE
+*/
+delete(value){
+
+}
+
+recDelete(value){
+    // CASE 1: Deleting a node with ONE or NO child node
+    // CASE 2: Deleting a node with TWO child nodes
+}
 
 // -----------------------------------------------------------------------------------------------//
 // -----------------------------------------------------------------------------------------------//

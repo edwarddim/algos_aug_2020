@@ -54,7 +54,7 @@ class BST{
     */
     insert(value){
         var newnode=new BSTNode(value);
-        runner=this.root;
+        var runner=this.root;
         if(this.isEmpty())
         {
             this.root=newnode;
@@ -123,4 +123,73 @@ class BST{
         return false
     
     }
-}
+    /* 
+        TAKES IN A SORTED ARR AND CREATES A BST WITH NUMBERS
+        FROM ARRAY
+        [1,2,3,4,5,6,7]
+    */
+    sortedArrtoBST(arr){
+        var index=Math.floor(arr.length/2)
+        this.insert(arr[index]);
+        if(arr.length==1)
+            return;
+        
+        this.sortedArrtoBST(arr.slice(0,index));
+        this.sortedArrtoBST(arr.slice(index++));
+    }
+
+    /* 
+        RETURNS THE HEIGHT OF THE BST
+    */
+
+
+//
+    height(runner=this.root,count=0){
+        if(runner==null)return count;
+        count++;
+        var leftlink=this.height(runner.left,count)
+        var rightlink=this.height(runner.right,count)
+        if(leftlink>rightlink)return leftlink;
+        else return rightlink;
+    }
+
+    isBalanced(runner=this.head){
+        //IF TREE IS EMPTY RETURN TRUE
+        if(runner==null)return true;
+        //GET THE HEIGHT OF BOTH SIDES OF THE CURRENT NODE
+        var lHeight=this.height(runner.left);
+        var rHeight=this.height(runner.right);
+        //BIG BOY IF CHECK
+        if(
+            //IS THE DIFFERENCE IN HEIGHT BETWEEN THE SIDES OF THE NODE LESS THAN 2?
+            Math.abs(lHeight-rHeight)<2&&
+            //IS THE LEFT SIDE BALANCED?
+            this.isBalanced(runner.left)&&
+            //IS THE RIGHT SIDE BALANCED?
+            this.isBalanced(runner.right)
+            //IF ALL THAT IS TRUE, THEN TREE IS BALANCED
+            )return true;
+        //IF WE GET HERE, IT WASNT BALANCED...DARN
+        return false;
+    }
+
+    // delete(value){
+    //     if(!this.contains(value))return "value is not in BST";
+
+    // }
+
+    inOrder(runner=this.root){
+        if(runner !=null){
+            this.inOrder(runner.left);
+            console.log(runner.value);
+            this.inOrder(runner.right);
+        }
+    }
+
+};
+
+
+ 
+var bst=new BST();
+bst.sortedArrtoBST([1,2,3,4,5])
+console.log(bst.height())

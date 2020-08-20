@@ -126,35 +126,71 @@ rRange(){
     return this.rMax()-this.rMin();
 }
 
-height(){
-    let dict={};
-    runner=this.root;
-    while(runner!=null){
-        for(let i=this.min();i<this.this.max();)
-        let count=1;
-        
-    }
-    
+
+
+/* 
+    TAKES IN A SORTED ARR AND CREATES A BST WITH NUMBERS
+    FROM ARRAY
+*/
+
+sortedArrToBSTWrapper(arr){
+    this.root = this.sortedArrtoBST(arr)
 }
 
+sortedArrtoBST(arr){
+    if (arr.length == 0){
+        return null; 
+    }
+    var mid = Math.floor(arr.length/2)
+    var midVal = arr[mid]
+    var sliceR = arr.slice(mid+1, arr.length)
+    var sliceL = arr.slice(0, mid)
+    var newNode = new BSTNode(midVal)
+    newNode.right = this.sortedArrtoBST(sliceR)
+    newNode.left = this.sortedArrtoBST(sliceL)
+    return newNode //WOOOOT
+}
+
+/* 
+    RETURNS THE HEIGHT OF THE BST
+*/
+height(runner=this.root,count=0){
+    if(runner==null)return count;
+    count++;
+    var leftlink=this.height(runner.left,count)
+    var rightlink=this.height(runner.right,count)
+    if(leftlink>rightlink)return leftlink;
+    else return rightlink;
+}
+
+ isBalanced(runner=this.root){
+     if(runner==null){
+         
+         return true;
+     }
+    // now that you have the lBalance, rBalance, and the height difference
+    // you want to evaluate all three to them together
+     var lbalanced=this.isBalanced(runner.left);
+     var rbalanced=this.isBalanced(runner.right);
+
+     
+
+     if(lbalanced==false ||rbalanced==false)
+        return false;
+     else{
+        var leftheight=this.height(runner.left);
+        var rightheight=this.height(runner.right);
+        if(Math.abs(leftheight-rightheight)>1)
+            {return false;}
+        else
+            {return true;}
+     }
+
+     if(Math.abs(leftheight-rightheight) <= 1 && lbalanced && rbalanced ){
+         return true
+     }
+     return false
+ }
 
 
-// WED
-// insert(value)
-
-
-// -----------------------------------------------------------------------------------------------//
-// -----------------------------------------------------------------------------------------------//
-
-// THUR
-// height()
-
-// -----------------------------------------------------------------------------------------------//
-// -----------------------------------------------------------------------------------------------//
-
-// FRI
-// isBalanced()
-
-// -----------------------------------------------------------------------------------------------//
-// -----------------------------------------------------------------------------------------------//
 }
