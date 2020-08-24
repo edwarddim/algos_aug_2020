@@ -1,5 +1,3 @@
- // BINARY SEARCH TREE
-
 class BSTNode{
     constructor(value){
         this.value = value
@@ -7,23 +5,14 @@ class BSTNode{
         this.right = null
     }
 }
+
 class BST{
     constructor(){
         this.root = null;
     }
-
-
-    // MON
-
-    /* 
-        CHECK TO SEE IF BST IS EMPTY
-    */
     isEmpty(){
         return (this.root == null) 
     }
-    /* 
-        RETURN THE MINIMUM VALUE STORED IN THE BST
-    */
     min(){
         var runner = this.root;
         while (runner.left != null){
@@ -31,10 +20,6 @@ class BST{
         }
         return runner.value
     }
-
-    /* 
-        RETURN THE MAXIMUM VALUE STORED IN THE BST
-    */
     max(){
         var runner = this.root;
         while (runner.right != null){
@@ -49,9 +34,6 @@ class BST{
         return(max-min);
         
     }
-    /* 
-        CREATE A NODE IN THE BST AT THE RIGHT PLACE
-    */
     insert(value){
         var newnode=new BSTNode(value);
         var runner=this.root;
@@ -79,36 +61,6 @@ class BST{
             }   
         }    
     }
-
-    recinsert(runner=this.root,value)
-    {
-        if(runner==null){
-            var newnode=new BSTNode(value);
-            runner=newnode;
-            return;
-        }
-        if(value>=runner.value){
-            this.recinsert(runner.right,value);
-        }
-        else{
-            this.recinsert(runner.left,value);
-        }
-    }
-    /* 
-        RETURNS TRUE IF THE VALUE EXISTS WITHIN THE BST
-    */
-    reccontains(runner=this.root,value){
-        if(runner.value==null)
-            return false;
-        if(runner.value==value)
-            return true;
-        if(value>runner.value)
-            return reccontains(runner.right,value);
-        else{
-            return reccontains(runner.left,value)
-        }
-    }
-
     contains(value){
         var runner=this.root;
         while(runner!=null)
@@ -123,34 +75,22 @@ class BST{
         return false
     
     }
-    /* 
-        TAKES IN A SORTED ARR AND CREATES A BST WITH NUMBERS
-        FROM ARRAY
-        [1,2,3,4,5,6,7]
-    */
-    sortedArrtoBST(arr){
-        var index=Math.floor(arr.length/2)
-        this.insert(arr[index]);
-        if(arr.length==1)
-            return;
-        
-        this.sortedArrtoBST(arr.slice(0,index));
-        this.sortedArrtoBST(arr.slice(index++));
+    sortedArrToBSTWrapper(arr){
+        this.root = this.sortedArrtoBST(arr)
     }
-
-    /* 
-        RETURNS THE HEIGHT OF THE BST
-    */
-
-
-//
-    height(runner=this.root,count=0){
-        if(runner==null)return count;
-        count++;
-        var leftlink=this.height(runner.left,count)
-        var rightlink=this.height(runner.right,count)
-        if(leftlink>rightlink)return leftlink;
-        else return rightlink;
+    
+    sortedArrtoBST(arr){
+        if (arr.length == 0){
+            return null; 
+        }
+        var mid = Math.floor(arr.length/2)
+        var midVal = arr[mid]
+        var sliceR = arr.slice(mid+1, arr.length)
+        var sliceL = arr.slice(0, mid)
+        var newNode = new BSTNode(midVal)
+        newNode.right = this.sortedArrtoBST(sliceR)
+        newNode.left = this.sortedArrtoBST(sliceL)
+        return newNode
     }
 
     isBalanced(runner=this.head){
@@ -173,26 +113,25 @@ class BST{
         return false;
     }
 
-
-     delete(value){
-         if(!this.contains(value))return "value is not in BST";
-        else{
-            while(runner!=value){
-
-            }
-        }
-
-
-
-
-
-    
-     }
-
-
-
-
-
+    isBalanced(runner=this.head){
+        //IF TREE IS EMPTY RETURN TRUE
+        if(runner==null)return true;
+        //GET THE HEIGHT OF BOTH SIDES OF THE CURRENT NODE
+        var lHeight=this.height(runner.left);
+        var rHeight=this.height(runner.right);
+        //BIG BOY IF CHECK
+        if(
+            //IS THE DIFFERENCE IN HEIGHT BETWEEN THE SIDES OF THE NODE LESS THAN 2?
+            Math.abs(lHeight-rHeight)<2&&
+            //IS THE LEFT SIDE BALANCED?
+            this.isBalanced(runner.left)&&
+            //IS THE RIGHT SIDE BALANCED?
+            this.isBalanced(runner.right)
+            //IF ALL THAT IS TRUE, THEN TREE IS BALANCED
+            )return true;
+        //IF WE GET HERE, IT WASNT BALANCED...DARN
+        return false;
+    }
     inOrder(runner=this.root){
         if(runner !=null){
             this.inOrder(runner.left);
@@ -200,11 +139,32 @@ class BST{
             this.inOrder(runner.right);
         }
     }
-
-};
-
-
- 
-var bst=new BST();
-bst.sortedArrtoBST([1,2,3,4,5])
-console.log(bst.height())
+    delete(value, node=this.root){
+        if(node == null) return null
+        else if(value < node.value) node.left = this.delete(value, node.left)
+        else if(value > node.value) node.right = this.delete(value, node.right)
+        else{
+            // CASE 1: Deleting with ONE child or NO child
+            if(node.left == null){
+                var temp = node.right
+                node = null
+                console.log("Deletion from node.left==null")
+                return temp
+            }
+            else if(node.right == null){
+                var temp = node.left
+                node = null
+                console.log("Deletion node.right==null")
+                return temp
+            }
+            // CASE 2: Deleting with two child (finding MIN of RIGHT SUBTREE)
+            else{
+                console.log('TWO CHILD DELETE')
+                var temp = this.findMin(node.right)
+                node.value = temp.value
+                node.right = this.delete(temp.value, node.right)
+            }
+        }
+        return node
+    };
+}

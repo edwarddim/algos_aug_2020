@@ -98,9 +98,10 @@ delete(value){
 
 }
 
-recDelete(value){
-    // CASE 1: Deleting a node with ONE or NO child node
-    // CASE 2: Deleting a node with TWO child nodes
+recDelete(node, value){
+    // CASE 1: Deleting a node with ONE or NO child node(NOT RECURRSIVE)
+
+    // CASE 2: Deleting a node with TWO child nodes(RECURSIVE)
 }
 
 // -----------------------------------------------------------------------------------------------//

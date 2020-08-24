@@ -27,8 +27,7 @@ isEmpty(){
 /* 
     RETURN THE MINIMUM VALUE STORED IN THE BST
 */
-min(){
-    var runner=this.root;
+min(runner=this.root){
     while(runner.left!=null)
     {
         runner=runner.left;
@@ -51,8 +50,7 @@ rMin(runner=this.root){
 /* 
     RETURN THE MAXIMUM VALUE STORED IN THE BST
 */
-max(){
-    let runner=this.root;
+max(runner=this.root){
     while(runner.right!=null){
         runner=runner.right;
     }
@@ -191,6 +189,39 @@ height(runner=this.root,count=0){
      }
      return false
  }
+
+ recDelete(node=this.root, value){
+    if(node.value!=value){
+        if(node.value<value){
+            return this.recDelete(node.left,value);
+        }
+        else return this.recDelete(node.right,value);
+    }
+    else{
+        // CASE 1: Deleting a node with ONE or NO child node(NOT RECURRSIVE)
+        var temp=node.value;
+        if(node.left==null&&node.right==null){
+            node=null;
+            return temp;
+        }
+        if(node.left==null){
+            node = node.right;
+            return temp;
+        }
+        if(node.right==null){
+            node=node.left;
+            return temp;
+        }
+        
+        // CASE 2: Deleting a node with TWO child nodes(RECURSIVE)
+        else{
+            var min=this.min(node.right);
+            node.value=min;
+            return this.recDelete(node.right,min);
+        }
+
+     }
+}
 
 
 }

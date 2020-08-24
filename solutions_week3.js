@@ -25,3 +25,32 @@ sortedArrtoBST(arr){
     root.right = this.sortedArrtoBST(arr.slice(mid+1, arr.length))
     return root
 };
+
+delete(node, value){
+    if(node == null) return null
+    else if(value < node.value) node.left = this.delete(node.left, value)
+    else if(value > node.value) node.right = this.delete(node.right, value)
+    else{
+        // CASE 1: Deleting with ONE child or NO child
+        if(node.left == null){
+            var temp = node.right
+            node = null
+            console.log("Deletion from node.left==null")
+            return temp
+        }
+        else if(node.right == null){
+            var temp = node.left
+            node = null
+            console.log("Deletion node.right==null")
+            return temp
+        }
+        // CASE 2: Deleting with two child (finding MIN of RIGHT SUBTREE)
+        else{
+            console.log('TWO CHILD DELETE')
+            var temp = this.findMin(node.right)
+            node.value = temp.value
+            node.right = this.delete(node.right, temp.value)
+        }
+    }
+    return node
+};
