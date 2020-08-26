@@ -63,7 +63,9 @@ shiftUp(){
     Extracting a value from a heap takes our "ROOT" and returns that value
     But since this is a min heap, we need to rearrange our heap by taking the max
     to the "ROOt" and then shiftDown
-
+    1. Save the "ROOT" number so that we can return it
+    2. Pop number in arr and replace "ROOT" number with it
+    3. trigger shiftDown() to make a min heap again
 */
 extract(){
 
