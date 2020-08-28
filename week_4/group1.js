@@ -1,3 +1,4 @@
+;
 // TUE
 /*
     Inserting a new value in to the heap requires you to push
@@ -79,8 +80,70 @@ class MinHeap{
                 this.heap[i*2] = temp;
                 this.shiftDown(i*2);
             }
-        }
+        } 
         return
+    }
+
+    heapify(arr, length, i){
+        var smallInd = i
+        var leftInd = i * 2
+        var rightInd = (i * 2) + 1
+        // 1. CHECK TO SEE IF CHILDREN NODE OF i IS SMALLER
+        // AND SWAP WITH SMALLER CHILD
+        if(rightInd<length){
+            if( arr[leftInd] < arr[rightInd] ){
+                if(arr[leftInd]<arr[smallInd]){
+                    var temp=arr[leftInd];
+                    arr[leftInd]=arr[smallInd];
+                    arr[smallInd]=temp;
+                    this.heapify(arr, length, leftInd);
+                }
+            }
+            else{
+                if(arr[rightInd]<arr[smallInd]){
+                    var temp=arr[rightInd];
+                    arr[rightInd]=arr[smallInd];
+                    arr[smallInd]=temp;
+                    this.heapify(arr, length, rightInd);
+                }
+            }
+
+        }
+        if(leftInd==length-1){
+            if(arr[leftInd]<arr[smallInd]){
+                var temp=arr[leftInd];
+                arr[leftInd]=arr[smallInd];
+                arr[smallInd]=temp;
+                this.heapify(arr, length, leftInd);
+            }
+        }
+        return;
+
+        // 2. RECURSIVELY CALL ON THE SMALLER CHILD
+        
+
+        // 3. RETURN IF NO NODES WERE SWAPPED
+    }
+
+    heapSort(arr){
+        // HEAPIFIES THE ARR
+        // 1. FIND THE MIDDLE POINT OF OUR DATA
+        var startPoint = Math.floor(arr.length/2)
+        // 2. HEAPIFY FROM THAT DATAPOINT TO INDEX 1
+        var stop=arr.length;
+        while(startPoint >= 1){
+            this.heapify(arr, stop, startPoint)
+            startPoint-=1;
+        }
+
+// ----------------------------------------------- //
+        // SORT THE ARRAY W/ HEAPIFTY
+        // 1. SWAP THE MIN(ROOT) WITH THE LAST NUM IN FIRST HALF ARRAY
+        // 2. THEN HEAPIFY THE THE FIRST HALF OF THE ARRAY
+        while(stop>=1){
+
+        }
+        
     }
 }
 

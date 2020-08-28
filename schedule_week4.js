@@ -78,7 +78,23 @@ shiftDown(){
 // -----------------------------------------------------------------------------------------------//
 
 // THUR
+heapify(arr, length, i){
+    // 1. CHECK TO SEE IF CHILDREN NODE OF i IS SMALLER
+    // AND SWAP WITH SMALLER CHILD
 
+    // 2. RECURSIVELY CALL ON THE SMALLER CHILD
+
+    // 3. RETURN IF NO NODES WERE SWAPPED
+
+}
+
+heapSort(arr){
+    // HEAPIFIES THE ARR
+    // 1. FIND THE MIDDLE POINT OF OUR DATA
+    // 2. HEAPIFY FROM THAT DATAPOINT TO INDEX 1
+
+    // 2. SORT THE ARRAY W/ HEAPIFTY
+}
 
 // -----------------------------------------------------------------------------------------------//
 // -----------------------------------------------------------------------------------------------//

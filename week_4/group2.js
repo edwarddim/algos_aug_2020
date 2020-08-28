@@ -35,6 +35,32 @@ class MinHeap{
         }
         // we can do this iteratively, doesn't need to be recrusive
     }
+
+    heapify(arr, length, i){
+        // 1. CHECK TO SEE IF CHILDREN NODE OF i IS SMALLER
+        // AND SWAP WITH SMALLER CHILD
+        // 2. RECURSIVELY CALL ON THE SMALLER CHILD
+        // 3. RETURN IF NO NODES WERE SWAPPED
+        var leftChild = i *2;
+        var rightChild = (i * 2) + 1;
+        if(arr[leftChild] > arr[rightChild]){
+            var temp = arr[leftChild]
+        }
+        else{
+            var temp = arr[rightChild];
+        }
+    
+    }
+    
+    heapSort(arr){
+        // HEAPIFIES THE ARR
+        // 1. FIND THE MIDDLE POINT OF OUR DATA
+        // 2. HEAPIFY FROM THAT DATAPOINT TO INDEX 1
+    
+        // 2. SORT THE ARRAY W/ HEAPIFTY
+    }
+
+
     printHorizontalTree(parentIdx = 1, spaceCnt = 0, spaceIncr = 10) {
         if (parentIdx > this.heap.length - 1) {
           return;
@@ -56,4 +82,73 @@ class MinHeap{
         console.log("-".repeat(msgLen), arrStr, ...appendedMsgs);
     }
 
+
+
+
+
+heapify(arr, length, i=1){
+    var smallInd = i
+    var leftInd = i * 2
+    var rightInd = (i * 2) + 1
+    // 1. CHECK TO SEE IF CHILDREN NODE OF i IS SMALLER
+    // AND SWAP WITH SMALLER CHILD
+    if(rightInd<length){
+        var swapInd=i;
+        if( arr[leftInd] < arr[rightInd] ){
+            if(arr[leftInd]<arr[smallInd]){
+                swapInd=leftInd;
+                this.heapify(arr, length, leftInd);
+            }
+        }
+        else{
+            if(arr[rightInd]<arr[smallInd]){
+                swapInd=rightInd;
+                this.heapify(arr, length, rightInd);
+            }
+        }
+
+    }
+    if(leftInd==length-1){
+        if(arr[leftInd]<arr[smallInd]){
+            swapInd=leftInd;
+            this.heapify(arr, length, leftInd);
+        }
+    }
+    var temp=arr[swapInd];
+    arr[swapInd]=arr[i];
+    arr[i]=temp;
+    return;
+
+    // 2. RECURSIVELY CALL ON THE SMALLER CHILD
+    
+
+    // 3. RETURN IF NO NODES WERE SWAPPED
+}
+
+heapSort(arr){
+    // HEAPIFIES THE ARR
+    // 1. FIND THE MIDDLE POINT OF OUR DATA
+    var startPoint = Math.floor(arr.length/2)
+    // 2. HEAPIFY FROM THAT DATAPOINT TO INDEX 1
+    var stop=arr.length;
+    while(startPoint >= 1){
+        this.heapify(arr, stop, startPoint)
+        startPoint-=1;
+    }
+
+// ----------------------------------------------- //
+    // SORT THE ARRAY W/ HEAPIFTY
+    // 1. SWAP THE MIN(ROOT) WITH THE LAST NUM IN FIRST HALF ARRAY
+    // 2. THEN HEAPIFY THE THE FIRST HALF OF THE ARRAY
+    while(stop>=2){
+        var temp = arr[1];
+        stop--;
+        arr[1] = arr[stop];
+        arr[stop] = temp;
+        this.heapify(arr,stop)
+
+    }
+    
+    
+}   
 }
